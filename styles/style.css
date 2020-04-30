@@ -16,38 +16,15 @@
   }
 }
 
-/* СЛУЖЕБНАЯ ПОДСВЕТКА ЭЛЕМЕНТОВ ТЕНЬЮ */
-/* div, h1, h2, h3, h4, p, a, img, iframe, ul, li {
-  box-shadow: 0 0 0 1px green;
-} */
-
 .page {
     min-width: 1100px;
-    /* мы ещё не умеем делать мобильную версию сайта, */
-    /* поэтому выше установлена минимальная ширина страницы */
     max-width: 1600px;
-    /* выше установили ограничение по максимальной ширине */
     margin: 0 auto;
-    /* выше для экранов больше 1600px отцентрировали весь контент */
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Если я правильно понял, в общем случае, когда нет конфликта или переопределения явно объявленных свойств,
-мы перечисляем в CSS правила в прямом порядке, соответствующем порядку в HTML. В первом ДЗ у меня была
-некоторая путаница с этим, т. к. я думал, что наиболее общий класс (блока контейнера) нужно ставить последним.
-Теперь решил поставить такие классы первыми. А некоторые общие классы вынести наверх, но ниже page. Буду
-признателен за комментарии по этому поводу, если что-то не так. */
-
-/* пока что главное, чтобы классы-модификаторы шли ниже основных классов. Подход "мы перечисляем в CSS правила
-в прямом порядке,
-соответствующем порядку в HTML" тут уместен, а со следующей работы уже будет рекомендовано стили тоже
-организовывать согласно БЭМ,
-и вопрос отпадет сам собой) */
-
 .section-title {
   width: 60%;
-  /* См. коммент к .description */
-  /* margin: 100px auto 0; */
   margin: 0 auto 0;
 
   text-align: center;
@@ -66,10 +43,6 @@
   font-weight: normal;
 }
 
-/* Поставил время поменьше, т. к., имхо, для ссылки плавность не оч – юзеру нужно поскорее показать,
-что это ссылка. По той же причине - из-за характера взаимодействия со ссылкой - решил, что плавное
-восстановление непрозрачности не нужно - поэтому transition в hover. */
-/* Так тоже можно:) */
 .link:hover {
   opacity: .3;
   transition: opacity .3s ease;
@@ -80,7 +53,6 @@
   height: 100vh;
   min-height: 600px;
   max-height: 756px;
-  /* выше установили ограничения для секции */
   background-color: #F2F2F2;
   overflow: hidden;
   position: relative;
@@ -104,14 +76,7 @@
   line-height: 96px;
   font-size: 102px;
   font-weight: bold;
-
-  /* Заменил margin – auto на align-self, обнаружив, что в IE при margin – auto заголовок накладывался на
-  логотип. */
-  /* Отлично! */
   align-self: center;
-  /* margin-top: auto;
-  margin-bottom: auto; */
-
   margin-left: 64px;
   z-index: 2;
 }
@@ -138,7 +103,6 @@
   z-index: 1;
 }
 
-/* ниже мы привели пример двух селекторов, чтобы вы вспомнили запись элемента */
 .header__square-pic {
     width: 568px;
     height: 568px;
@@ -157,15 +121,7 @@
 
 .description {
   display: flex;
-
-  /* В брифе промежуток между разделами в 100 пикселей реализован, как я понимаю графические обозначения,
-  за счет padding'а раздела, а не margin'а стоящего в нем заголовка. Но я в первой работе реализовал это
-  за счет отступа у заголовка. Чтобы все-таки привести все в соответствие брифу, принимаю решение убрать
-  у заголовка margin, а блоку добавить верхний padding. Придется изменить глобально, так как класс заголовка
-  используется повторно. */
   padding-top: 100px;
-  /* Разумная идея) В первой работе мы это не поправляем как раз для того, чтобы на второй Вы дошли до этого
-  сами:)  */
 }
 
 .two-columns {
@@ -183,11 +139,7 @@
   font-weight: normal;
   color: #2F80ED;
   margin: 0;
-  padding-right: 20px; /* Не вижу в брифе такого требования,
-  но иначе при маленькой ширине окна текст встает вплотную к two-columns__main-text.
-  Буду признателен, если подскажете более оптимальный способ это исключить. */
-
-  /* На данном этапе от вас не требуют резиновой верстки, эта тема будет подробно разбираться чуть позже:)  */
+  padding-right: 20px;
 }
 
 .two-columns__main-text {
@@ -218,55 +170,22 @@
   margin: 0 auto 0;
 }
 
-/* Если мы используем grid-row-gap: 60px;, то расстояние между строками (карточками) удваивается:
-grid-row-gap не схлопывается ни с паддингом карточки, ни с марджином картинки. Следовательно, ЛИБО
-grid-row-gap, ЛИБО марджин/паддинг. Пытался понять логику линий в брифе и считаю, что все-таки
-STRONG верхние 60 пикселей лучше сделать частью карточки, /STRONG
-а не паддингом контейнера карточек.
-Во-первых, это просто логичнее с т. з. структуры карточки, во-вторых – Internet Explorer. Как понял из
-чьей-то дискуссии с наставником, мы НЕ беспокоимся сейчас о том, что гриды не поддерживаются в IE. Однако,
-имхо, все-таки неплохо хоть по минимуму сделать, чтобы в нем тоже нормально выглядело. Если задать паддинг
-в 60 пкс вне карточки, то в IE каждая картинка прилипает к вышестоящему тексту. А относится-то она
-к нижестоящему. */
-
 .cards {
   width: 920px;
   margin: 0 auto;
-  /* padding-top: 60px; */
-
   display: grid;
-
-
-  /* grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 100px; */
-
-
-  /* grid-template-columns: repeat(3, 240px);
-  grid-column-gap: 100px; */
-
-  /* В брифе нет ограничения по количеству колонок. А значит, адаптивность в приоритете.
-  Поэтому выбираю этот вариант. Хотя задавать 240 пикселей и не хочется, поскольку это означает
-  рассчитывать. Хотелось бы, конечно, использовать что-то гибкое. */
   grid-template-columns: repeat(auto-fill, 240px);
   grid-column-gap: 100px;
-  /* grid-row-gap: 60px; */
-
-  /* Почему-то ставит все в одну колонку((( Даже если задать ширину cards__item. Хотя кажется самым
-  адаптивным. */
-  /* grid-template-columns: repeat(auto-fill, 1fr);
-  grid-column-gap: 100px; */
 }
 
 .cards__item {
   padding-top: 60px;
-  /* width: 240px; */
 }
 
 .cards__image {
   width: 160px;
   height: 160px;
   margin: 0 40px 43px;
-  /* margin: 60px 40px 43px; */
   border-radius: 50%;
 }
 
@@ -292,31 +211,16 @@ STRONG верхние 60 пикселей лучше сделать частью
 }
 
 .video__iframes {
-  /* A */
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center; */
-
-  /* B */
   display: grid;
   grid-template-columns: repeat(2, min-content);
   grid-gap: 20px;
   justify-content: center;
 }
 
-/* A */
-/* .video__iframes:last-child {
-  margin: 0;
-} */
-
 .video__iframe {
   width: 515px;
   height: 316px;
   border-style: none;
-
-  /* A */
-  /* margin: 0 0 0 20px; */
-
   transform: translate(0, 50px);
 }
 
@@ -379,8 +283,6 @@ STRONG верхние 60 пикселей лучше сделать частью
 
 .khan__book-container {
   display: flex;
-
-  /* Исправляю и обновляю ранее отправленный архив: */
   align-items: flex-start;
 }
 
@@ -454,10 +356,6 @@ STRONG верхние 60 пикселей лучше сделать частью
   right: 48px;
 }
 
-/* .feinman__link:hover {
-  text-decoration: underline;
-} */
-
 .feinman__subtitle {
   text-align: center;
   margin-top: 70px;
@@ -481,25 +379,22 @@ STRONG верхние 60 пикселей лучше сделать частью
 .section-title_theme_dark {
   color: white;
   margin: 0 auto;
-  position: relative; /* чтобы задействовать z-index */
+  position: relative;
   z-index: 1;
 }
 
 .section-subtitle_theme_dark {
   color: white;
-  position: relative; /* чтобы задействовать z-index */
+  position: relative;
   z-index: 1;
 }
 
 .table_theme_dark {
-  /* Было */
   margin: 0 auto;
-
-  position: relative; /* чтобы задействовать z-index */
+  position: relative;
   z-index: 1;
 }
 
-/* и элемента с модификатором вида ключ-значение */
 .table__cell_theme_dark {
   width: 200px;
   color: white;
@@ -509,10 +404,6 @@ STRONG верхние 60 пикселей лучше сделать частью
 .kaufman {
   background-color: #1F1F1F;
   padding: 90px 0;
-
-  /* Задавать не нужно было - здесь дети и так по умолчанию блочные */
-  /* display: block; */
-
   position: relative;
   overflow: hidden;
 }
@@ -590,10 +481,8 @@ STRONG верхние 60 пикселей лучше сделать частью
 
 /* СТОЛБЕЦ 1 */
 .footer__column_content_copyright {
-  /* margin: 0; */
   display: flex;
   flex-basis: 711px;
-  /* position: relative; */
   flex-direction: column;
   justify-content: space-between;
 }
@@ -617,7 +506,6 @@ STRONG верхние 60 пикселей лучше сделать частью
 
 /* СТОЛБЕЦ 3 */
 .footer__column_content_social {
-  /* margin: 0; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -632,10 +520,6 @@ STRONG верхние 60 пикселей лучше сделать частью
   text-decoration: none;
   color: white;
 }
-
-/* .footer__column-link:hover {
-  text-decoration: underline;
-} */
 
 .footer__columns {
   width: 90%;
