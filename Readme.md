@@ -2,16 +2,16 @@
 ***For English scroll down***
 
 Учебное задание по верстке простой статичной страницы
-## Размещение
+#### Размещение
 https://vitalytikhonov.github.io/My-First-Static-Web-Page/
-## Используемые технологии
+#### Используемые технологии
 - HTML
 - CSS
 ***
-# My first web page
+# My first web page (EN)
 An academic project on coding a simple static web-page
-## Access
+#### Access
 https://vitalytikhonov.github.io/My-First-Static-Web-Page/
-## Technologies used
+#### Technologies used
 - HTML
 - CSS
